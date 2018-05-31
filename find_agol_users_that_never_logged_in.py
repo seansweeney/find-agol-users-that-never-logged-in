@@ -26,10 +26,10 @@ except:
     print(sys.exc_info()[0])
     exit(1)
 
-# Use list comprehension to create a subset list of disabled users
+# Use list comprehension to create a subset list of users that haven't logged in
 never_logged_in = [user for user in all_users if user.lastLogin == -1]
 
-# Items are either in a folder or not. The latter are called root items. There can only be one folder level, so only one level needs to be traversed.
+# There's limited information attached to these users, but username and role may give more indication of who they are.
 for user in sorted(never_logged_in, key=attrgetter('lastName', 'firstName')):
     print(user.fullName + " (" + user.username + ")")
     print("Role: " + gis.users.roles.get_role(user.roleId).name)
